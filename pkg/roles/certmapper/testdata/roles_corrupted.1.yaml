@@ -1,0 +1,10 @@
+v1
+roles:
+  jokes-client:
+  - "C=US, ST=wa, L=Kirkland, O=Ekspand, CN=jokes1.ekspand.com"
+  - "C=US, ST=wa, L=Kirkland, O=Ekspand, CN=jokes2.ekspand.com"
+  - "C=US, ST=wa, L=Kirkland, O=Ekspand, CN=jokes3.ekspand.com"
+  jokes-peer:
+  - "C=US, ST=wa, L=Kirkland, O=Ekspand, CN=peers.jokes1.ekspand.com"
+  - "C=US, ST=wa, L=Kirkland, O=Ekspand, CN=peers.jokes2.ekspand.com"
+  - "C=US, ST=wa, L=Kirkland, O=Ekspand, CN=peers.jokes3.ekspand.com"

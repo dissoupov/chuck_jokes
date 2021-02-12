@@ -1,0 +1,33 @@
+version: "2"
+
+networks:
+  jokes_private:
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: 10.68.54.0/24
+
+volumes:
+  jokes-shared-certs:
+
+services:
+  jokes-node1:
+    image: jokes:latest
+    domainname: node1.jokes.ca
+    networks:
+      jokes_private:
+        ipv4_address: 10.68.54.100
+        aliases:
+          - node1.jokes.ca
+    volumes:
+      - jokes-shared-certs:/var/jokes/certs
+    ports:
+      - "5000" # Public WebAPI
+      - "8080" # Status
+    entrypoint:
+      - /bin/bash
+      - -c
+      - >-
+        /jokes/bin/jokes --std
+        --cfg=/jokes/etc/dev/jokes-config.json

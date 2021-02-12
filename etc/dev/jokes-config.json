@@ -1,0 +1,94 @@
+{
+    "defaults" : {
+      "ServiceName"       : "jokes",
+      "Datacenter"        : "dev",
+      "Environment"       : "test",
+      "HTTP" : {
+        "Disabled"        : true,
+        "ServiceName"     : "health",
+        "BindAddr"        : ":8080",
+        "PackageLogger"   : "github.com/dissoupov/jokes/health",
+        "AllowProfiling"  : false,
+        "HeartbeatSecs"   : 0,
+        "Services"        : []
+      },
+      "HTTPS" : {
+        "ServiceName"     : "webapi",
+        "ServerTLS_notused" : {
+          "CertFile"      : "certs/test_jokes_server.pem",
+          "KeyFile"       : "certs/test_jokes_server-key.pem",
+          "TrustedCAFile" : "certs/rootca/test_jokes_root_CA.pem",
+          "ClientCertAuth": "VerifyClientCertIfGiven"
+        },
+        "BindAddr"        : ":5000",
+        "AllowProfiling"  : false,
+        "HeartbeatSecs"   : 60,
+        "Services"        : ["jokes"]
+      },
+      "Authz" : {
+        "AllowAny" : [
+          "/",
+          "/v1/status"
+        ],
+        "AllowAnyRole" : [
+          "/v1/jokes"
+        ],
+        "Allow" : [
+          "/v1/jokes/admin:jokes-admin,jokes-jokes"
+        ],
+        "LogAllowed"      : true,
+        "LogDenied"       : true,
+        "APIKeyMapper"    : "",
+        "CertMapper"      : "roles-cert.dev.yaml",
+        "JWTMapper"       : ""
+      },
+      "LogLevels" : [
+        {
+          "Repo"          : "*",
+          "Level"         : "TRACE"
+        },
+        {
+          "Repo"          : "github.com/dissoupov/jokes",
+          "Package"       : "*",
+          "Level"         : "DEBUG"
+        }
+      ],
+      "Logger" : {
+        "Directory"       : "/tmp/jokes/logs",
+        "MaxAgeDays"      : 3,
+        "MaxSizeMb"       : 10
+      },
+      "Audit" : {
+        "Directory"       : "/tmp/jokes/audit",
+        "MaxAgeDays"      : 7,
+        "MaxSizeMb"       : 10
+      },
+      "Metrics" : {
+        "Provider"        : "inmemory"
+      },
+      "Jokes" : {
+        "NameSvcURL"      : "https://names.mcquay.me/api/v0/",
+        "Categories"      : ["nerdy"],
+        "JokesSvcURL"     : "http://api.icndb.com/jokes/random"
+      }
+    },
+    "hosts" : {
+      "LOCAL_DEMO"     : "LOCAL_DEMO",
+      "centy"           : "datadog"
+    },
+    "overrides" : {
+      "datadog" : {
+        "Metrics" : {
+          "Provider"        : "datadog"
+        }
+      },
+      "LOCAL_DEMO" : {
+        "HTTP" : {
+          "BindAddr"        : ":8080"
+        },
+        "HTTPS" : {
+          "BindAddr"        : ":5000"
+        }
+      }
+    }
+}

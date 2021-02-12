@@ -1,0 +1,14 @@
+valid_organizations:
+- "Jokes"
+- "Jokes.com"
+valid_issuers:
+- "CN=[TEST] Jokes Root CA"
+roles:
+  jokes-client:
+  - "C=US, ST=wa, L=Kirkland, O=Jokes, CN=jokes1.ekspand.com"
+  - "C=US, ST=wa, L=Kirkland, O=Jokes, CN=jokes2.ekspand.com"
+  - "C=US, ST=wa, L=Kirkland, O=Jokes, CN=jokes3.ekspand.com"
+  jokes-peer:
+  - "C=US, ST=wa, L=Kirkland, O=Jokes, CN=peers.jokes1.ekspand.com"
+  - "C=US, ST=wa, L=Kirkland, O=Jokes, CN=peers.jokes2.ekspand.com"
+  - "C=US, ST=wa, L=Kirkland, O=Jokes, CN=peers.jokes3.ekspand.com"
